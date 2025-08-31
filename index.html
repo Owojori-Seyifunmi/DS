@@ -6,18 +6,150 @@
     <title>Deispring Schools</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    
+    <style>
+        /* Additional CSS for Gallery Section */
+        .gallery {
+            padding: 60px 0;
+            background-color: var(--color-white);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            height: 250px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(202, 50, 50, 0.8);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .lightbox-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .lightbox-btn {
+            background: rgba(202, 50, 50, 0.7);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background 0.3s ease;
+        }
+        
+        .lightbox-btn:hover {
+            background: rgba(202, 50, 50, 1);
+        }
+        
+        .lightbox-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .gallery-item {
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav>
         <div class="container nav-container">
-            <!-- <a href="#" class="logo">Deispring <span>Schools</span></a> -->
-            <a href="/" class="logo"><img src="images/logo.png" alt=""></a>
+            <a href="/" class="logo"><img src="images/logo.png" alt="Deispring Schools Logo"></a>
             
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#record">Record</a></li>
                 <li><a href="#testimonial">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -95,7 +227,7 @@
             
             <div class="about-container">
                 <div class="about-image">
-                    <img src="images/DEI2.png" alt="Deispring Schools Campus">
+                    <img src="images/about.png" alt="Deispring Schools Campus">
                 </div>
                 
                 <div class="about-content">
@@ -134,6 +266,60 @@
                     </div>
                     
                     <a href="#contact" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h4>Gallery</h4>
+                <h2>Life at Deispring Schools</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item" data-index="0">
+                    <img src="images/gallery.jpg" alt="Students learning in classroom">
+                    <div class="gallery-caption">
+                        <h3>DEISPRING COLLEGE</h3>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="1">
+                    <img src="images/gallery2.jpg" alt="Students in science lab">
+                    <div class="gallery-caption">
+                        <h3>DEISPRING COLLEGE</h3>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="2">
+                    <img src="images/gallery3.jpg" alt="Students playing sports">
+                    <div class="gallery-caption">
+                        <h3>DEISPRING COLLEGE</h3>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="3">
+                    <img src="images/gallery4.jpg" alt="Student art exhibition">
+                    <div class="gallery-caption">
+                        <h3>DEISPRING COLLEGE</h3>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="4">
+                    <img src="images/gallery5.jpg" alt="School library">
+                    <div class="gallery-caption">
+                        <h3>DEISPRING COLLEGE</h3>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-index="5">
+                    <img src="images/gallery6.jpg" alt="Graduation ceremony">
+                    <div class="gallery-caption">
+                        <h3>DEISPRING COLLEGE</h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -186,20 +372,24 @@
             <div class="testimonials-container">
                 <div class="testimonial active">
                     <img src="https://placehold.co/100x100/e5e5e5/CA3232?text=P" alt="Parent" class="testimonial-img">
-                    <p class="testimonial-text">"Deispring Schools has been a blessing to our family. The teachers are caring and dedicated, and my children are thriving both academically and socially."</p>
-                    <p class="testimonial-author">- Mrs. Johnson, Parent</p>
+                    <p class="testimonial-text">"Thanks for laying a good foundation for my children's education. My daughter had the highest entrance examination score at a popular High school and had the 3rd best score in another one. All thanks to the solid educational foundation you and your team have laid. Her brother is also currently doing amazingly well too. He won the Outstanding Critical Thinker award in his class."</p>
+                    <p class="testimonial-author">-Parent</p>
                 </div>
                 
                 <div class="testimonial">
                     <img src="https://placehold.co/100x100/e5e5e5/CA3232?text=P" alt="Parent" class="testimonial-img">
-                    <p class="testimonial-text">"The balanced approach to education at Deispring has helped my child develop not just academically, but also as a well-rounded individual with strong values."</p>
-                    <p class="testimonial-author">- Mr. Williams, Parent</p>
+                    <p class="testimonial-text">"
+My son, Valiant, participated in a Spelling Bee competition in our church's children's department. He spelt so well, that he even competed with a 6 year old boy. He spelled words that are longer than two/three letter words and won the 1st prize. I didn't expect it at all, I'm so emotional this morning. Thanks so much ma. 
+God bless you ma, God bless his teacher, God bless all the teachers. God bless Deispring school. The school will soar higher and higher, IJN.
+
+."</p>
+                    <p class="testimonial-author">-Parent</p>
                 </div>
                 
                 <div class="testimonial">
                     <img src="https://placehold.co/100x100/e5e5e5/CA3232?text=P" alt="Parent" class="testimonial-img">
-                    <p class="testimonial-text">"We moved our children to Deispring Schools last year and have seen remarkable improvement in their grades and overall enthusiasm for learning."</p>
-                    <p class="testimonial-author">- Mrs. Adeyemi, Parent</p>
+                    <p class="testimonial-text">"Before my daughter, Tolu, joined Deispring, she was always timid to speak in public. Since she joined the school, she has become bold and confident to speak publicly."</p>
+                    <p class="testimonial-author">-Parent</p>
                 </div>
                 
                 <div class="testimonial-nav">
@@ -306,6 +496,7 @@
                     <ul class="footer-links">
                         <li><a href="#">Home</a></li>
                         <li><a href="#about">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#record">Our Record</a></li>
                         <li><a href="#testimonial">Testimonials</a></li>
                         <li><a href="#contact">Contact Us</a></li>
@@ -338,6 +529,183 @@
         </div>
     </footer>
 
-    <script src="index.js"></script>
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <div class="lightbox-nav">
+            <div class="lightbox-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></div>
+            <div class="lightbox-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="lightbox-content">
+            <img src="" alt="" id="lightboxImage">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navContainer = document.querySelector('.nav-container');
+
+        navToggle.addEventListener('click', () => {
+            // Check if mobile menu already exists
+            let mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenu) {
+                mobileMenu.remove();
+            } else {
+                // Create mobile menu
+                mobileMenu = document.createElement('div');
+                mobileMenu.className = 'mobile-menu';
+                
+                // Clone navigation links
+                const navLinks = document.querySelector('.nav-links').cloneNode(true);
+                mobileMenu.appendChild(navLinks);
+                
+                // Clone social icons
+                const navSocials = document.querySelector('.nav-socials').cloneNode(true);
+                mobileMenu.appendChild(navSocials);
+                
+                // Add to page
+                document.body.appendChild(mobileMenu);
+                
+                // Add click event to close menu when clicking on links
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.remove();
+                    });
+                });
+            }
+        });
+
+        // Testimonial Slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentTestimonial = 0;
+
+        function showTestimonial(index) {
+            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+            testimonials[index].classList.add('active');
+        }
+
+        prevBtn.addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Gallery Lightbox Functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const prevBtnLightbox = document.getElementById('prevBtn');
+        const nextBtnLightbox = document.getElementById('nextBtn');
+        
+        let currentImageIndex = 0;
+        
+        // Open lightbox with clicked image
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                currentImageIndex = parseInt(item.getAttribute('data-index'));
+                updateLightboxImage();
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+            });
+        });
+        
+        // Close lightbox
+        lightboxClose.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Navigate to previous image
+        prevBtnLightbox.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+            updateLightboxImage();
+        });
+        
+        // Navigate to next image
+        nextBtnLightbox.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+            updateLightboxImage();
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.style.display === 'flex') {
+                if (e.key === 'Escape') {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                } else if (e.key === 'ArrowLeft') {
+                    currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
+                    updateLightboxImage();
+                } else if (e.key === 'ArrowRight') {
+                    currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
+                    updateLightboxImage();
+                }
+            }
+        });
+        
+        // Update lightbox content
+        function updateLightboxImage() {
+            const activeImage = galleryItems[currentImageIndex].querySelector('img');
+            const activeCaption = galleryItems[currentImageIndex].querySelector('.gallery-caption h3');
+            
+            lightboxImage.src = activeImage.src;
+            lightboxImage.alt = activeImage.alt;
+            lightboxCaption.textContent = activeCaption.textContent;
+        }
+    </script>
 </body>
 </html>
